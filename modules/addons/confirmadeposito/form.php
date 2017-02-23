@@ -61,7 +61,7 @@
 		{
 			$qr2 = $pdo->query("SELECT mod_confirmadeposito.*, tblinvoices.*, tblclients.*, tblclients.id AS usuid FROM mod_confirmadeposito INNER JOIN tblinvoices ON tblinvoices.id = fatura_confirmadeposito INNER JOIN tblclients ON tblclients.id = tblinvoices.userid WHERE id_confirmadeposito = '".$_POST['txt-fatura']."';");
 			$row2 = $qr2->fetch();
-			require ROOTDIR . "/includes/invoicefunctions.php";
+			require "../../../includes/invoicefunctions.php";
 			addInvoicePayment($_POST['txt-fatura'], "#CONFIRMADEPO-".$_POST['txt-fatura'], $row2['total'], "0", 'contadeposito');
 			$confirmado = "1";
 		}
