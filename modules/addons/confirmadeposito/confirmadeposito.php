@@ -50,17 +50,17 @@
 		{
 			if($_POST['modo'] == "confirma")
 			{
-				$sql = $pdo->prepare("UPDATE mod_confirmadeposito SET confirmado_confirmadeposito = '1 WHERE fatura_confirmadeposito = '".$_POST['fatura']."';");
+				$sql = $pdo->prepare("UPDATE mod_confirmadeposito SET confirmado_confirmadeposito = '1' WHERE fatura_confirmadeposito = '".$_POST['fatura']."';");
 				$sql->execute();
 				$pdo->commit();
 				$qr2 = $pdo->query("SELECT mod_confirmadeposito.*, tblinvoices.*, tblclients.*, tblclients.id AS usuid FROM mod_confirmadeposito INNER JOIN tblinvoices ON tblinvoices.id = fatura_confirmadeposito INNER JOIN tblclients ON tblclients.id = tblinvoices.userid WHERE id_confirmadeposito = '".$_POST['fatura']."';");
 				$row2 = $qr2->fetch();
-				require "../../../includes/invoicefunctions.php";
+				require "../includes/invoicefunctions.php";
 				addInvoicePayment($_POST['fatura'], "#CONFIRMADEPO-".$_POST['fatura'], $row2['total'], "0", 'contadeposito');
 				header("LOCATION: addonmodules.php?module=confirmadeposito".(isset($_GET['cfm'])?"&cfm=1":null));
 			}
 			else {
-				$sql = $pdo->prepare("UPDATE mod_confirmadeposito SET confirmado_confirmadeposito = 2 WHERE fatura_confirmadeposito = '".$_POST['fatura']."';");
+				$sql = $pdo->prepare("UPDATE mod_confirmadeposito SET confirmado_confirmadeposito = '2' WHERE fatura_confirmadeposito = '".$_POST['fatura']."';");
 				$sql->execute();
 				$pdo->commit();
 				header("LOCATION: addonmodules.php?module=confirmadeposito".(isset($_GET['cfm'])?"&cfm=1":null));
