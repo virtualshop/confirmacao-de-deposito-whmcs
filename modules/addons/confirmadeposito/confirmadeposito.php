@@ -151,7 +151,9 @@
 		else {
 			if(isset($_POST['txt-automatico']))
 			{
-				$pdo->query("UPDATE mod_confirmadeposito_config SET automatico_config = '".$_POST['txt-automatico']."', alerta_config = '".$_POST['txt-alerta']."', bancos_config = '".$_POST['txt-bancos']."';");
+				$sql = $pdo->prepare("UPDATE mod_confirmadeposito_config SET automatico_config = '".$_POST['txt-automatico']."', alerta_config = '".$_POST['txt-alerta']."', bancos_config = '".$_POST['txt-bancos']."';");
+				$sql->execute();
+				$pdo->commit();
 			}
 			$qr = $pdo->query("SELECT * FROM mod_confirmadeposito_config WHERE id_config = '1';");
 			$row = $qr->fetch();
